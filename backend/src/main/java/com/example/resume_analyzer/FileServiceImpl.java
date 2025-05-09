@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -18,6 +19,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 
 import jakarta.annotation.PostConstruct;
 
+@Service
 public class FileServiceImpl implements FileService{
     @Value("${aws.s3.bucketName}")
     private String bucketName;
@@ -35,7 +37,7 @@ public class FileServiceImpl implements FileService{
         BasicAWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
         s3Client = AmazonS3ClientBuilder.standard()
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
-                .withRegion(Regions.AP_SOUTHEAST_1)
+                .withRegion(Regions.US_EAST_2)
                 .build();
     }
 

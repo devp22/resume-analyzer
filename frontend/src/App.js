@@ -10,9 +10,10 @@ function App() {
   const [file, setFile] = useState(null);
   const handleChange = (file) => {
     setFile(file);
-    axios.post("http://localhost:8080/api/file", file[0].name, {
-      headers: { "Content-Type": "application/json" },
-    });
+    const formData = new FormData();
+    formData.append("file", file[0]);
+    axios.post("http://localhost:8080/api/file", file[0].name, {});
+    axios.post("http://localhost:8080/api/upload", formData, {});
   };
   return (
     <div className="App">
